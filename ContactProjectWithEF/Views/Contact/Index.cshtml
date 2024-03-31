@@ -1,0 +1,44 @@
+﻿@using ContactProjectWithEF.Models.Entities
+@model List<Contact>?
+
+@{
+}
+
+<a role="button" class="btn btn-primary" href="/contact/create" >add</a>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>نام</th>
+            <th>موبایل</th>
+            <th>تلفن</th>
+            <th>گروه</th>
+            <th>عملیات</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model is { Count: > 0 })
+        {
+            foreach (var contact in Model)
+            {
+                <tr>
+                    <td>@contact.FullName</td>
+                    <td>@contact.Mobile</td>
+                    <td>@contact.Phone</td>
+                    <td>@contact.Group.Name</td>
+                    <td>
+                        <a role="button" href="/contact/details/@contact.Id" class="btn btn-outline-info">details</a>
+                        <a role="button" href="/contact/edit/@contact.Id" class="btn btn-outline-primary">edit</a>
+                        <a href="/contact/delete/@contact.Id" class="btn btn-outline-danger">delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>دیتایی جهت نمایش وجود ندارد.</td>
+            </tr>
+        }
+    </tbody>
+</table>
